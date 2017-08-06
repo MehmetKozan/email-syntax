@@ -5,8 +5,15 @@ const syntaxValidate = require('../');
 
 describe('Syntax validation of email address', function(){
     describe('Address splitting', function(){
-        it('splits email address to local part and domain name');
-        it('returns empty object if email address is not valid for splitting');
+        it('splits email address to local part and domain name', function(){
+            assert.deepEqual(syntaxValidate.split('email@domain.com'), { localPart: 'email', domainName: 'domain.com'});
+        });
+        it('returns empty object if email address is not valid for splitting', function(){
+            assert.deepEqual(syntaxValidate.split('email@domain@com'), {});
+            assert.deepEqual(syntaxValidate.split('email'), {});
+            assert.deepEqual(syntaxValidate.split(''), {});
+            assert.deepEqual(syntaxValidate.split(), {});
+        });
     });
     describe('Local part', function(){
         it("may be quoted", function(){
@@ -79,5 +86,11 @@ describe('Common address validations', function(){
     });
     it("can't be 'email@domain..com'", function(){
         assert.isNotOk(syntaxValidate.validate('email@domain..com'));
+    });
+    it("can't be 'email@'", function(){
+        assert.isNotOk(syntaxValidate.validate('email@'));
+    });
+    it("can't be '@domain.com'", function(){
+        assert.isNotOk(syntaxValidate.validate('@domain.com'));
     });
 });
