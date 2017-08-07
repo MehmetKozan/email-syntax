@@ -132,7 +132,7 @@ describe('Common address validations', function(){
         assert.isNotOk(syntaxValidate.validate('email@domain..com'));
     });
     it('can\'t be \'"em"ail"@domain.com\'', function(){
-        assert.isNotOk(syntaxValidate.validate('email@domain..com'));
+        assert.isNotOk(syntaxValidate.validate('em"ail"@domain.com'));
     });
     it("can't be 'email@'", function(){
         assert.isNotOk(syntaxValidate.validate('email@'));
