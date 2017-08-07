@@ -1,6 +1,6 @@
 {
   "name": "email-syntax",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Email addresses syntax validations library",
   "main": "index.js",
   "scripts": {
