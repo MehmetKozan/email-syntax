@@ -57,4 +57,9 @@ typings/
 # dotenv environment variables file
 .env
 
-lib/
+# src dir
+src/
+
+*.ts
+!*.d.ts
+!lib/
