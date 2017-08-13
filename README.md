@@ -30,6 +30,16 @@ Usage of validator is simple as 2 + 2. You need to import class and then use its
     }
 ```
 
+On server environment you can use additional methods:
+* split(address) - Splits email address to local part and domain name
+* extractFromQuotes(localPart) - Checks if quoted and extracts local part
+* validateDomainName(domainName) - Validates domain name syntaxis
+* validateLocalPart(localPart) - Validates local-part of address
+* isValidIpAddress(domainName) - Checks if domain name is a valid ip address like 1.2.3.4
+
+
+
+
 ### Angular 2/4
 
 ```typescript
