@@ -56,6 +56,8 @@ export class EmailSyntax{
     private static validateDomainName(domainName: string): boolean{
         const parts: Array<string> = domainName.split('.');
         if (parts.length === 0) return false;
+        /* Check if last part of tld domain is number (can't be) */
+        if (parts.length > 1 && !Number.isNaN(+parts[parts.length - 1])) return false;
         for(let i = 0; i < parts.length; i++){
             if (parts[i].length === 0) return false;
             let p: RegExpMatchArray = parts[i].match(this.domainPartRegex);
@@ -80,11 +82,10 @@ export class EmailSyntax{
      * @return {boolean}
      */
     private static isValidIpAddress(domainName: string): boolean{
-        const ip: Array<string> = domainName.split('.');
+        const ip: Array<number> = domainName.split('.').map(o => +o);
         if (ip.length !== 4) return false;
-        const _ip: Array<number> = ip.map(o => +o);
         for(let i = 0; i < 4; i++){
-            if (isNaN(_ip[i]) || _ip[i] > 254 || _ip[i] < 1) return false;
+            if (isNaN(ip[i]) || ip[i] > 254 || ip[i] < 1) return false;
         }
         return true;
     }

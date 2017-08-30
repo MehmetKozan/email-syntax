@@ -4,6 +4,8 @@ const emailSyntax = require('../lib/email-syntax').EmailSyntax;
 describe('Common email addresses validations', function(){
     it('must be in form "local-part@domain-name"', () => {
         expect(emailSyntax.validate('abc@domain')).toBeTruthy();
+        expect(emailSyntax.validate('abc@domain.com')).toBeTruthy();
+        expect(emailSyntax.validate('abc@domain.net')).toBeTruthy();
         expect(emailSyntax.validate('abc@domain@domain2')).toBeFalsy();
         expect(emailSyntax.validate('')).toBeFalsy();
     });
@@ -15,6 +17,7 @@ describe('Common email addresses validations', function(){
     it("can be in form 'abc@172.16.12.3'", () => {
         expect(emailSyntax.validate('abc@172.16.12.3')).toBeTruthy();
         expect(emailSyntax.validate('abc@172.16.abc.3')).toBeFalsy();
+        expect(emailSyntax.validate('abc@111.222.333.44444')).toBeFalsy();
     });
     it("can't be '.email@domain.com'", () => {
         expect(emailSyntax.validate('.email@domain.com')).toBeFalsy();
